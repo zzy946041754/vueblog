@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @blog: blog.csdn.net/qq_43365046
  * @email zzz946041754@163.com
- * @description: 统一返回结果封装
+ * @description:
  * @author: zzy
  * @data: 2021/1/24-17:44
  **/
@@ -16,7 +16,7 @@ public class Result {
     private Object data;
 
     public static Result succ(Object data){
-        return succ(200, "操作成功", data);
+        return succ(200, "鎿嶄綔鎴愬姛", data);
     }
 
     public static Result fail(String msg){

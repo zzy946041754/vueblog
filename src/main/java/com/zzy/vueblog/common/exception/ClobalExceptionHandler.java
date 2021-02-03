@@ -4,14 +4,18 @@ import com.zzy.vueblog.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 /**
  * @blog: blog.csdn.net/qq_43365046
  * @email zzz946041754@163.com
- * @description: 全局异常处理
+ * @description: 鍏ㄥ眬寮傚父澶勭悊
  * @author: zzy
  * @data: 2021/1/31-14:20
  **/
@@ -22,14 +26,23 @@ public class ClobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = RuntimeException.class)
     public Result handler(RuntimeException e){
-        log.error("运行时异常-------{}",e);
+        log.error("杩愯寮傚父-------{}",e);
         return Result.fail(e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(value = ShiroException.class)
     public Result handler(ShiroException e){
-        log.error("访问异常-------{}",e);
+        log.error("璁块棶寮傚父-------{}",e);
         return Result.fail(401,e.getMessage(),null);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public Result handler(MethodArgumentNotValidException e){
+        log.error("瀹炰綋鏍￠獙寮傚父-------{}",e);
+        BindingResult bindingResult = e.getBindingResult();
+        ObjectError error = bindingResult.getAllErrors().stream().findFirst().get();
+        return Result.fail(error.getDefaultMessage());
     }
 }

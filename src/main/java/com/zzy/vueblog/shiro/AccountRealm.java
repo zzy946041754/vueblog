@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.zzy.vueblog.entity.User;
 import com.zzy.vueblog.service.UserService;
 import com.zzy.vueblog.utils.JwtUtil;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -48,10 +47,10 @@ public class AccountRealm extends AuthorizingRealm {
         String userId = jwtUtil.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
         User user = userService.getById(Long.valueOf(userId));
         if (null == user){
-            throw new UnknownAccountException("’Àªß≤ª¥Ê‘⁄");
+            throw new UnknownAccountException("Áî®Êà∑‰∏çÂ≠òÂú®");
         }
         if (user.getStatus() == -1){
-            throw new LockedAccountException("’Àªß“—À¯∂®");
+            throw new LockedAccountException("Áî®Êà∑Â∑≤Ë¢´ÈîÅÂÆö");
         }
         AccountProfile profile = new AccountProfile();
         BeanUtil.copyProperties(user,profile);
