@@ -29,6 +29,7 @@ dependencies {
     compile group: 'com.baomidou', name: 'mybatis-plus-generator', version: '3.2.0'
     compile group: 'org.crazycake', name: 'shiro-redis-spring-boot-starter', version: '3.2.1'
     compile group: 'cn.hutool', name: 'hutool-all', version: '5.3.3'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
     //jwt
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
